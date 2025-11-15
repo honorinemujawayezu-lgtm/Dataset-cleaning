@@ -1,0 +1,84 @@
+---
+title: "cleaning dataset"
+output: html_document
+date: "2025-11-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+View(supermkt)
+
+```
+
+```{r}
+sum(is.na(supermkt))
+```
+```{r}
+sum(is.na(supermkt$`Unit price`))
+```
+
+```{r}
+summary(supermkt)
+```
+```{r}
+skimr::skim(supermkt)
+```
+```{r}
+attach(supermkt)
+```
+
+```{r}
+supermkt$`Unit price` = NULL ## Used to remove column with more missing value
+```
+
+```{r}
+names(supermkt)
+```
+
+```{r}
+supermkt$...12 = NULL
+```
+
+
+
+```{r}
+sum(is.na(supermkt$Sales))
+```
+```{r}
+skimr::skim(supermkt)
+```
+```{r}
+supermkt$Sales[is.na(supermkt$Sales)] <- median(supermkt$Sales,na.rm = TRUE)
+supermkt$`Tax 5%`[is.na(supermkt$`Tax 5%`)] <- median(supermkt$`Tax 5%`,na.rm = TRUE)
+```
+
+```{r}
+supermkt$`gross margin percentage`[is.na(supermkt$`gross margin percentage`)] <- median(supermkt$`gross margin percentage`,na.rm = TRUE)
+```
+```{r}
+supermkt$cogs[is.na(supermkt$cogs)] <- median(supermkt$cogs,na.rm = TRUE)
+colSums(is.na(supermkt))
+```
+```{r}
+supermkt$`Tax 5%`[is.na(supermkt$`Tax 5%`)] <- median(supermkt$`Tax 5%`,na.rm = TRUE)
+colSums(is.na(supermkt))
+```
+
+```{r}
+duplicated(supermkt)
+sum(duplicated(supermkt))
+```
+
+```{r}
+## checking capacity and increasing
+getOption("max.print") #check
+options(max.print = 999) ## increasing capacity
+```
+```{r}
+### packages
+
+```
+
